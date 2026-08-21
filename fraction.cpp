@@ -1,44 +1,69 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-class fraction{
-int num,den;
+
+class Fraction
+{
+    int num, den;
+
 public:
-void input (){
-cout<<"enter numerator:";
-cin>>num;
-cout<<"enter denominator:";
-cin>>den;
-}
-void display(){
-cout<<num<<"/"<<den;
-}
-fraction add(fraction f){
-fraction temp;
-temp.num=(num*f.den)+(f.num*den);
-temp.den=den*f.den;
-return temp;
-}
-fraction sub(fraction f){
-fraction temp;
-temp.num=(num*f.den)-(f.num*den);
-temp.den= den*f.den;
-return temp;
-}
+    void accept()
+    {
+        cout << "Enter numerator and denominator: ";
+        cin >> num >> den;
+    }
+
+    Fraction add(Fraction f)
+    {
+        Fraction r;
+        r.num = num * f.den + f.num * den;
+        r.den = den * f.den;
+        return r;
+    }
+
+    Fraction subtract(Fraction f)
+    {
+        Fraction r;
+        r.num = num * f.den - f.num * den;
+        r.den = den * f.den;
+        return r;
+    }
+
+    void display()
+    {
+        int a = num, b = den, t;
+
+        while(b != 0)
+        {
+            t = a % b;
+            a = b;
+            b = t;
+        }
+
+        num = num / a;
+        den = den / a;
+
+        cout << num << "/" << den << endl;
+    }
 };
-int main(){
-fraction f1,f2,sum,difference;
-cout<<"enter first fraction:\n";
-f1.input();
-cout<<"\nEnter second fraction:\n";
-f2.input();
-sum=f1.add(f2);
-difference=f1.sub(f2);
-cout<<"\nAddition =";
-sum.display();
-cout<<"\nSubtraction=";
-difference.display();
-return 0;
+
+int main()
+{
+    Fraction f1, f2, sum, sub;
+
+    cout << "Enter first fraction:\n";
+    f1.accept();
+
+    cout << "Enter second fraction:\n";
+    f2.accept();
+
+    sum = f1.add(f2);
+    sub = f1.subtract(f2);
+
+    cout << "Addition = ";
+    sum.display();
+
+    cout << "Subtraction = ";
+    sub.display();
+
+    return 0;
 }
-
-
-
